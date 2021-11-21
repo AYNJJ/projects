@@ -17,9 +17,7 @@ JOIN inventory i
 JOIN rental r
   ON r.inventory_id = i.inventory_id
 WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')) t1
-
 ORDER BY 2, 1
-
 
 
 /* Query 2 - query used for seccond slide titled:
@@ -39,12 +37,10 @@ JOIN film_category fc
 JOIN film f
   ON f.film_id = fc.film_id
 WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')) t1
-
 GROUP BY 3,
          1,
          2
 ORDER BY 4, 3, 1
-
 
 
 /* Query 3 - query used for 3rd slide titled:
@@ -66,7 +62,6 @@ WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music
 GROUP BY 1,
          2
 ORDER BY 1, 2
-
 
 
 /* Query 4 - query used for 4th slide titled:
