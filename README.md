@@ -11,8 +11,12 @@ This repo contains the projects I have worked on during this course.
 ## Projects
 
 * SQL Project - Investigate a Relational Database
+	- queries.txt
+	- report.pdf
+	
 * Python Project - Explore US Bikeshare Data
-
+	- bikeshare.py
+	
 ## Creators
 
 * Ayaan J
