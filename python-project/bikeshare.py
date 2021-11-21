@@ -20,6 +20,7 @@ def get_filters():
     city = input('Would you like to see data for Chicago, New York City or Washington?\n').lower()
     
     if city not in ['chicago','new york city','washington']:
+        #loop to handle invalid inputs
         while city not in ['chicago','new york city','washington']:
             city = input('Wrong city, please enter the city again choosing between Chicago, New York City and Washington.\n').lower()
     # TO DO: get user input for month (all, january, february, ... , june)
