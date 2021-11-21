@@ -1,0 +1,87 @@
+/* Question set 1: Question 1: Query 1 - query used for first slide titled "Films rented by category"*/
+SELECT DISTINCT
+  film_title,
+  category,
+  COUNT(rental) OVER (PARTITION BY film_title) AS rental_count
+FROM (SELECT
+  f.title AS film_title,
+  c.name AS category,
+  r.rental_id AS rental
+FROM category c
+JOIN film_category fc
+  ON fc.category_id = c.category_id
+JOIN film f
+  ON f.film_id = fc.film_id
+JOIN inventory i
+  ON f.film_id = i.film_id
+JOIN rental r
+  ON r.inventory_id = i.inventory_id
+WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')) t1
+
+ORDER BY 2, 1
+
+
+
+/* Question set 1: Question 2: Query 2 - query used for seccond slide titled:
+"Rental duration of films in family category per quartile" */
+SELECT
+  film_title,
+  category,
+  rental_duration,
+  NTILE(4) OVER (PARTITION BY category ORDER BY rental_duration ASC) AS standard_quartile
+FROM (SELECT
+  f.title AS film_title,
+  c.name AS category,
+  f.rental_duration AS rental_duration
+FROM category c
+JOIN film_category fc
+  ON fc.category_id = c.category_id
+JOIN film f
+  ON f.film_id = fc.film_id
+WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')) t1
+
+GROUP BY 3,
+         1,
+         2
+ORDER BY 4, 3, 1
+
+
+
+/* Question set 1: Question 3: Query 3 - query used for 3rd slide titled:
+"Number of films rented in family category per quartile" */
+SELECT
+  category,
+  standard_quartile,
+  COUNT(*)
+FROM (SELECT
+  c.name AS category,
+  rental_duration,
+  NTILE(4) OVER (ORDER BY rental_duration) AS standard_quartile
+FROM category c
+JOIN film_category fc
+  ON fc.category_id = c.category_id
+JOIN film f
+  ON f.film_id = fc.film_id
+WHERE c.name IN ('Animation', 'Children', 'Classics', 'Comedy', 'Family', 'Music')) t1
+GROUP BY 1,
+         2
+ORDER BY 1, 2
+
+
+
+/* Question set 2: Question 1: Query 4 - query used for 4th slide titled:
+"Films rented per store per month in a year" */
+SELECT
+  DATE_PART('year', rental_date ::date) AS Rental_year,
+  DATE_PART('month', rental_date ::date) AS Rental_month,
+  s.store_id AS Store_ID,
+  COUNT(*) AS Count_rentals
+FROM store s
+JOIN staff st
+  ON st.store_id = s.store_id
+JOIN rental r
+  ON st.staff_id = r.staff_id
+GROUP BY 3,
+         2,
+         1
+ORDER BY 4 DESC
