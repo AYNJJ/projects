@@ -1,4 +1,4 @@
-/* Question set 1: Question 1: Query 1 - query used for first slide titled "Films rented by category"*/
+/* Query 1 - query used for first slide titled "Films rented by category"*/
 SELECT DISTINCT
   film_title,
   category,
@@ -22,7 +22,7 @@ ORDER BY 2, 1
 
 
 
-/* Question set 1: Question 2: Query 2 - query used for seccond slide titled:
+/* Query 2 - query used for seccond slide titled:
 "Rental duration of films in family category per quartile" */
 SELECT
   film_title,
@@ -47,7 +47,7 @@ ORDER BY 4, 3, 1
 
 
 
-/* Question set 1: Question 3: Query 3 - query used for 3rd slide titled:
+/* Query 3 - query used for 3rd slide titled:
 "Number of films rented in family category per quartile" */
 SELECT
   category,
@@ -69,7 +69,7 @@ ORDER BY 1, 2
 
 
 
-/* Question set 2: Question 1: Query 4 - query used for 4th slide titled:
+/* Query 4 - query used for 4th slide titled:
 "Films rented per store per month in a year" */
 SELECT
   DATE_PART('year', rental_date ::date) AS Rental_year,
